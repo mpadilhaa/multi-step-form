@@ -8,6 +8,11 @@ export const UseYearOrMonthPlan = () => {
 
 export const UseYearOrMonthProvider = ({ children }) => {
   const [yearOrMonth, setYearOrMonth] = useState(true);
+  const [value, setValue] = useState(0);
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValuesArray, setSelectedValuesArray] = useState([]);
+
+  const valueofTheChosenPlan = [];
 
   const changePlan = () => {
     setYearOrMonth(!yearOrMonth);
@@ -15,7 +20,19 @@ export const UseYearOrMonthProvider = ({ children }) => {
   };
 
   return (
-    <UseYearOrMonthPlanContext.Provider value={{ yearOrMonth, changePlan }}>
+    <UseYearOrMonthPlanContext.Provider
+      value={{
+        yearOrMonth,
+        changePlan,
+        valueofTheChosenPlan,
+        setValue,
+        selectedValuesArray,
+        setSelectedValuesArray,
+        selectedValues,
+        setSelectedValues,
+        value,
+      }}
+    >
       {children}
     </UseYearOrMonthPlanContext.Provider>
   );
