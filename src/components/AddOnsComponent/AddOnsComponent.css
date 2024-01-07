@@ -1,0 +1,11 @@
+.add-ons {
+  background-color: blueviolet;
+  color: white;
+  display: flex;
+  gap: 30px;
+}
+
+.card-add-ons {
+  width: 300px;
+  padding: 30px;
+}

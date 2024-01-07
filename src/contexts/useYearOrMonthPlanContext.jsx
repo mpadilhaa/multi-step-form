@@ -7,13 +7,13 @@ export const UseYearOrMonthPlan = () => {
 };
 
 export const UseYearOrMonthProvider = ({ children }) => {
-  const [yearOrMonth, setYearOrMonth] = useState(true);
-  const [value, setValue] = useState(0);
+  const [yearOrMonth, setYearOrMonth] = useState(false);
+  const [plan, setPlan] = useState({});
   const [selectedValues, setSelectedValues] = useState([]);
 
   const changePlan = () => {
     setYearOrMonth(!yearOrMonth);
-    console.log(yearOrMonth);
+    setPlan({});
   };
 
   return (
@@ -21,8 +21,8 @@ export const UseYearOrMonthProvider = ({ children }) => {
       value={{
         yearOrMonth,
         changePlan,
-        setValue,
-        value,
+        setPlan,
+        plan,
         selectedValues,
         setSelectedValues,
       }}

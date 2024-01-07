@@ -8,7 +8,7 @@ import AddOnsComponent from "./components/AddOnsComponent/AddOnsComponent";
 import { UseYearOrMonthPlan } from "./contexts/useYearOrMonthPlanContext";
 
 function App() {
-  const { value, selectedValues, setSelectedValues } = UseYearOrMonthPlan();
+  const { plan, selectedValues } = UseYearOrMonthPlan();
 
   const steps = [
     PersonalInfoComponent,
@@ -23,8 +23,6 @@ function App() {
     const StepComponent = steps[stepIndex];
     return <StepComponent />;
   };
-
-  console.log(stepIndex);
 
   const nextStep = () => {
     if (stepIndex === steps.length - 1) return;
@@ -43,8 +41,6 @@ function App() {
       {renderStep()}
       <button onClick={prevStep}>prev</button>
       <button onClick={nextStep}> next</button>
-      {value}
-      {selectedValues}
     </div>
   );
 }

@@ -1,56 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
+import "./AddOnsComponent.css";
 
 import { UseYearOrMonthPlan } from "../../contexts/useYearOrMonthPlanContext";
+
+const pickAddOns = [
+  {
+    id: 0,
+    title: "Online service",
+    description: "Access to multiplayer games",
+    value: 1,
+    checked: false,
+  },
+  {
+    id: 1,
+    title: "Large Storage",
+    description: "Extra 1TB of cloud save",
+    value: 2,
+    checked: false,
+  },
+  {
+    id: 2,
+    title: "Customizable profile",
+    description: "Custom theme on your profile",
+    value: 2,
+    checked: false,
+  },
+];
 
 const AddOnsComponent = () => {
   const { selectedValues, setSelectedValues } = UseYearOrMonthPlan();
 
-  const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    const numericValue = Number(value); // ou parseInt(value, 10);
-
+  const handleCheckboxChange = (id, title, value, checked) => {
     setSelectedValues((prevValues) => {
-      if (checked) {
-        // Adiciona o valor ao array se o checkbox foi marcado
-        return [...prevValues, numericValue];
-      } else {
-        // Remove o valor do array se o checkbox foi desmarcado
-        return prevValues.filter((v) => v !== numericValue);
+      const isDuplicateId = prevValues.some((item) => item.id === id);
+
+      if (isDuplicateId) {
+        const updatedValues = prevValues.filter((item) => item.id !== id);
+        return updatedValues;
       }
+
+      return [...prevValues, { id, title, value, checked }];
     });
   };
-
+  console.log(selectedValues);
   return (
-    <div>
-      <label>
-        <input
-          type="checkbox"
-          value="1"
-          checked={selectedValues.includes(1)}
-          onChange={handleCheckboxChange}
-        />
-        Opção 1
-      </label>
-
-      <label>
-        <input
-          type="checkbox"
-          value="2"
-          checked={selectedValues.includes(2)}
-          onChange={handleCheckboxChange}
-        />
-        Opção 2
-      </label>
-
-      <label>
-        <input
-          type="checkbox"
-          value="3"
-          checked={selectedValues.includes(3)}
-          onChange={handleCheckboxChange}
-        />
-        Opção 3
-      </label>
+    <div className="add-ons">
+      {pickAddOns?.map((item) => (
+        <div
+          className="card-add-ons"
+          key={item.name}
+          onClick={() =>
+            handleCheckboxChange(
+              item.id,
+              item.title,
+              item.value,
+              (item.checked = !item.checked)
+            )
+          }
+        >
+          <p>{item.title}</p>
+          <p>{item.description}</p>
+        </div>
+      ))}
     </div>
   );
 };
